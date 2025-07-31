@@ -4,6 +4,7 @@ from app.models.scan import Scan, ScanStatus
 from app.models.target import Target
 from app.models.user import User
 from app.models.vulnerability import Vulnerability
+from app.models.audit_log import AuditLog, AuditAction
 
 __all__ = [
     # Base
@@ -15,9 +16,11 @@ __all__ = [
     "Target",
     "User",
     "Vulnerability",
+    "AuditLog",
     # Enums
     "FindingCategory",
     "FindingStatus",
     "ScanStatus",
     "SeverityLevel",
+    "AuditAction",
 ]

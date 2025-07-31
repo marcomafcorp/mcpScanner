@@ -50,6 +50,14 @@ class Settings(BaseSettings):
     MAX_SCAN_DEPTH: int = Field(default=3)
     SCAN_TIMEOUT_SECONDS: int = Field(default=300)
     MAX_CONCURRENT_SCANS: int = Field(default=5)
+    
+    # Scanner Restrictions
+    ALLOWED_SCAN_DOMAINS: List[str] = Field(default=[])
+    BLOCKED_SCAN_DOMAINS: List[str] = Field(default=[])
+    ALLOW_LOCALHOST_SCAN: bool = Field(default=False)
+    ALLOW_PRIVATE_IP_SCAN: bool = Field(default=False)
+    RESPECT_ROBOTS_TXT: bool = Field(default=True)
+    MAX_REQUESTS_PER_SECOND: float = Field(default=10.0)
 
     # OWASP Dependency Check
     DEPENDENCY_CHECK_PATH: Optional[str] = Field(

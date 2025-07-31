@@ -9,6 +9,8 @@ from app.api.routes import health
 from app.api.v1.router import v1_router
 from app.middleware.rate_limit import RateLimitMiddleware
 from app.middleware.validation import RequestValidationMiddleware
+from app.middleware.response_security import ResponseSecurityMiddleware, ErrorHandlerMiddleware
+from app.middleware.security_headers import SecurityHeadersMiddleware
 
 
 @asynccontextmanager
@@ -38,6 +40,24 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# Configure Error Handler (outermost middleware)
+app.add_middleware(
+    ErrorHandlerMiddleware,
+    debug=settings.DEBUG
+)
+
+# Configure Security Headers
+app.add_middleware(
+    SecurityHeadersMiddleware,
+    strict_transport_security="max-age=31536000; includeSubDomains" if settings.is_production else None
+)
+
+# Configure Response Security
+app.add_middleware(
+    ResponseSecurityMiddleware,
+    debug=settings.DEBUG
 )
 
 # Configure Request Validation (should be before rate limiting)
