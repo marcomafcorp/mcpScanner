@@ -31,8 +31,13 @@ class Settings(BaseSettings):
         default="your-secret-key-here-change-in-production",
         description="Secret key for JWT encoding"
     )
-    ALGORITHM: str = Field(default="HS256")
+    REFRESH_SECRET_KEY: Optional[str] = Field(
+        default=None,
+        description="Separate secret key for refresh tokens"
+    )
+    JWT_ALGORITHM: str = Field(default="HS256")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30)
+    REFRESH_TOKEN_EXPIRE_DAYS: int = Field(default=7)
 
     # Redis Configuration
     REDIS_URL: str = Field(default="redis://localhost:6379/0")
@@ -80,3 +85,8 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+
+def get_settings() -> Settings:
+    """Get application settings."""
+    return settings
