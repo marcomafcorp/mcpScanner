@@ -67,6 +67,20 @@ class Settings(BaseSettings):
     # Logging
     LOG_LEVEL: str = Field(default="INFO")
     LOG_FORMAT: str = Field(default="json")
+    
+    # Encryption
+    ENCRYPTION_MASTER_KEY: Optional[str] = Field(
+        default=None,
+        description="Master key for field encryption"
+    )
+    ENCRYPTION_SALT: str = Field(
+        default="mcp-scanner-salt",
+        description="Salt for key derivation"
+    )
+    ENCRYPTION_ITERATIONS: int = Field(
+        default=100000,
+        description="PBKDF2 iterations"
+    )
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
