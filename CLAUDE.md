@@ -98,6 +98,19 @@ docker-compose down
 docker-compose down -v  # Also removes volumes
 ```
 
+### Git Commands
+```bash
+# IMPORTANT: After completing any full task, commit and push changes to GitHub
+git add .
+git commit -m "feat: describe the completed feature/task"
+git push origin main
+
+# Common git operations
+git status  # Check current changes
+git diff    # View unstaged changes
+git log --oneline -10  # View recent commits
+```
+
 ## High-Level Architecture
 
 ### Backend Architecture
